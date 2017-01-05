@@ -8,6 +8,8 @@ var webpackPostprocessor = wallabyWebpack({
 
   module: {
     loaders: [
+      // if you use templateUrl in your components and want to inline your templates uncomment the below line
+      // {test: /\.js$/, loader: 'angular2-template-loader', exclude: /node_modules/},
       {test: /\.css$/, loader: 'raw-loader'},
       {test: /\.json$/, loader: 'json-loader'},
       {test: /\.html$/, loader: 'raw-loader'},
