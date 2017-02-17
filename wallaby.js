@@ -1,8 +1,8 @@
 var wallabyWebpack = require('wallaby-webpack');
-// if you use the webpack defined variable ENV in any components 
-// uncomment the following lines and the plugins section in webpackPostprocessor below
-//const DefinePlugin = require('webpack/lib/DefinePlugin');
-//const ENV = process.env.ENV = process.env.NODE_ENV = 'test';
+
+// if you use the webpack defined variable ENV in any components
+const DefinePlugin = require('webpack/lib/DefinePlugin');
+const ENV = process.env.ENV = process.env.NODE_ENV = 'test';
 
 var webpackPostprocessor = wallabyWebpack({
   entryPatterns: [
@@ -13,21 +13,21 @@ var webpackPostprocessor = wallabyWebpack({
   module: {
     loaders: [
       // if you use templateUrl in your components and want to inline your templates uncomment the below line
-      // {test: /\.js$/, loader: 'angular2-template-loader', exclude: /node_modules/},
+      {test: /\.js$/, loader: 'angular2-template-loader', exclude: /node_modules/},
       
       // if importing .scss files in your component styleUrls uncomment the following line
       // { test: /\.scss$/, loaders: ['raw-loader', 'sass-loader'] },
       {test: /\.css$/, loader: 'raw-loader'},
       {test: /\.json$/, loader: 'json-loader'},
       {test: /\.html$/, loader: 'raw-loader'},
-      {test: /karma-require/, loader: 'null'}
+      {test: /karma-require/, loader: 'null-loader'}
     ]
   },
-   // plugins: [
-   //     new DefinePlugin({
-   //       'ENV': JSON.stringify(ENV)
-   //     })
-   // ]
+   plugins: [
+       new DefinePlugin({
+         'ENV': JSON.stringify(ENV)
+       })
+   ]
 });
 
 module.exports = function () {
